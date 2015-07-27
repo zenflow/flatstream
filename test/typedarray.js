@@ -1,4 +1,4 @@
-var concat = require('../')
+var flatten = require('../')
 var test = require('tape')
 var TA = require('typedarray')
 var U8 = typeof Uint8Array !== 'undefined' ? Uint8Array : TA.Uint8Array
@@ -12,7 +12,7 @@ test('typed array stream', function (t) {
   var c = new U8(4)
   c[0] = 32; c[1] = 120; c[2] = 121; c[3] = 122;
 
-  var arrays = concat({ encoding: 'Uint8Array' }, function(out) {
+  var arrays = flatten({ encoding: 'Uint8Array' }, function(out) {
     t.equal(typeof out.subarray, 'function')
     t.deepEqual(Buffer(out).toString('utf8'), 'abcde fg xyz')
   })
@@ -23,7 +23,7 @@ test('typed array stream', function (t) {
 
 test('typed array from strings, buffers, and arrays', function (t) {
   t.plan(2)
-  var arrays = concat({ encoding: 'Uint8Array' }, function(out) {
+  var arrays = flatten({ encoding: 'Uint8Array' }, function(out) {
     t.equal(typeof out.subarray, 'function')
     t.deepEqual(Buffer(out).toString('utf8'), 'abcde fg xyz')
   })

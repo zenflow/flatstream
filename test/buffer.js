@@ -1,11 +1,11 @@
-var concat = require('../')
+var flatten = require('../')
 var test = require('tape')
 var TA = require('typedarray')
 var U8 = typeof Uint8Array !== 'undefined' ? Uint8Array : TA.Uint8Array
 
 test('buffer stream', function (t) {
   t.plan(2)
-  var buffers = concat(function(out) {
+  var buffers = flatten(function(out) {
     t.ok(Buffer.isBuffer(out))
     t.equal(out.toString('utf8'), 'pizza Array is not a stringy cat')
   })
@@ -16,7 +16,7 @@ test('buffer stream', function (t) {
 
 test('buffer mixed writes', function (t) {
   t.plan(2)
-  var buffers = concat(function(out) {
+  var buffers = flatten(function(out) {
     t.ok(Buffer.isBuffer(out))
     t.equal(out.toString('utf8'), 'pizza Array is not a stringy cat555')
   })

@@ -1,8 +1,8 @@
-var concat = require('../')
+var flatten = require('../')
 var test = require('tape')
 
 test('type inference works as expected', function(t) {
-  var stream = concat()
+  var stream = flatten()
   t.equal(stream.inferEncoding(['hello']), 'array', 'array')
   t.equal(stream.inferEncoding(new Buffer('hello')), 'buffer', 'buffer')
   t.equal(stream.inferEncoding(undefined), 'buffer', 'buffer')

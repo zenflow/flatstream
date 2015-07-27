@@ -1,11 +1,11 @@
-var concat = require('../')
+var flatten = require('../')
 var test = require('tape')
 var TA = require('typedarray')
 var U8 = typeof Uint8Array !== 'undefined' ? Uint8Array : TA.Uint8Array
 
 test('string -> buffer stream', function (t) {
   t.plan(2)
-  var strings = concat({ encoding: 'buffer'}, function(out) {
+  var strings = flatten({ encoding: 'buffer'}, function(out) {
     t.ok(Buffer.isBuffer(out))
     t.equal(out.toString('utf8'), 'nacho dogs')
   })
@@ -16,7 +16,7 @@ test('string -> buffer stream', function (t) {
 
 test('string stream', function (t) {
   t.plan(2)
-  var strings = concat({ encoding: 'string' }, function(out) {
+  var strings = flatten({ encoding: 'string' }, function(out) {
     t.equal(typeof out, 'string')
     t.equal(out, 'nacho dogs')
   })
@@ -27,7 +27,7 @@ test('string stream', function (t) {
 
 test('end chunk', function (t) {
   t.plan(1)
-  var endchunk = concat({ encoding: 'string' }, function(out) {
+  var endchunk = flatten({ encoding: 'string' }, function(out) {
     t.equal(out, 'this is the end')
   })
   endchunk.write("this ")
@@ -37,7 +37,7 @@ test('end chunk', function (t) {
 
 test('string from mixed write encodings', function (t) {
   t.plan(2)
-  var strings = concat({ encoding: 'string' }, function(out) {
+  var strings = flatten({ encoding: 'string' }, function(out) {
     t.equal(typeof out, 'string')
     t.equal(out, 'nacho dogs')
   })
@@ -51,7 +51,7 @@ test('string from mixed write encodings', function (t) {
 
 test('string from buffers with multibyte characters', function (t) {
   t.plan(2)
-  var strings = concat({ encoding: 'string' }, function(out) {
+  var strings = flatten({ encoding: 'string' }, function(out) {
     t.equal(typeof out, 'string')
     t.equal(out, '☃☃☃☃☃☃☃☃')
   })
@@ -65,7 +65,7 @@ test('string from buffers with multibyte characters', function (t) {
 
 test('string infer encoding with empty string chunk', function (t) {
   t.plan(2)
-  var strings = concat(function(out) {
+  var strings = flatten(function(out) {
     t.equal(typeof out, 'string')
     t.equal(out, 'nacho dogs')
   })

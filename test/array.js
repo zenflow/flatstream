@@ -1,9 +1,9 @@
-var concat = require('../')
+var flatten = require('../')
 var test = require('tape')
 
 test('array stream', function (t) {
   t.plan(1)
-  var arrays = concat({ encoding: 'array' }, function(out) {
+  var arrays = flatten({ encoding: 'array' }, function(out) {
     t.deepEqual(out, [1,2,3,4,5,6])
   })
   arrays.write([1,2,3])

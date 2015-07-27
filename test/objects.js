@@ -1,9 +1,9 @@
-var concat = require('../')
+var flatten = require('../')
 var test = require('tape')
 
 test('writing objects', function (t) {
-  var stream = concat({encoding: "objects"}, concatted)
-  function concatted(objs) {
+  var stream = flatten({encoding: "objects"}, flattened)
+  function flattened(objs) {
     t.equal(objs.length, 2)
     t.deepEqual(objs[0], {"foo": "bar"})
     t.deepEqual(objs[1], {"baz": "taco"})
@@ -16,8 +16,8 @@ test('writing objects', function (t) {
 
 
 test('switch to objects encoding if no encoding specified and objects are written', function (t) {
-  var stream = concat(concatted)
-  function concatted(objs) {
+  var stream = flatten(flattened)
+  function flattened(objs) {
     t.equal(objs.length, 2)
     t.deepEqual(objs[0], {"foo": "bar"})
     t.deepEqual(objs[1], {"baz": "taco"})

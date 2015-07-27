@@ -1,10 +1,10 @@
-var concat = require('../')
+var flatten = require('../')
 var test = require('tape')
 var stream = require('readable-stream')
 
 test('writable', function(t){
     t.plan(3)
-    var writable = concat(function (data) {
+    var writable = flatten(function (data) {
         t.equal(data.toString('utf8'), 'foobar')
     })
     t.ok(writable instanceof stream.Writable)
@@ -18,7 +18,7 @@ test('writable', function(t){
 
 test('readable', function(t){
     t.plan(3)
-    var readable = concat(['foo', 'bar'])
+    var readable = flatten(['foo', 'bar'])
     t.ok(readable instanceof stream.Readable)
     t.ok(readable.isConcatStream)
     readable.once('data', function(data){
@@ -28,7 +28,7 @@ test('readable', function(t){
 
 test('duplex', function (t) {
     t.plan(3)
-    var duplex = concat()
+    var duplex = flatten()
     t.ok(duplex instanceof stream.Duplex)
     t.ok(duplex.isConcatStream)
     var readable = new stream.Readable
@@ -45,7 +45,7 @@ var dummy_transform = function (source) {return source.toString('utf8').replace(
 
 test('duplex /w transform', function (t) {
     t.plan(1)
-    var duplex = concat({transform: dummy_transform})
+    var duplex = flatten({transform: dummy_transform})
     var readable = new stream.Readable
     readable.push('up')
     readable.push('stream')
@@ -58,7 +58,7 @@ test('duplex /w transform', function (t) {
 
 test('writable /w transform', function (t) {
     t.plan(1)
-    var writable = concat({transform: dummy_transform}, function (data) {
+    var writable = flatten({transform: dummy_transform}, function (data) {
         t.equal(data.toString('utf8'), 'downstream')
     })
     var readable = new stream.Readable
@@ -70,7 +70,7 @@ test('writable /w transform', function (t) {
 
 test('readable /w transform', function (t) {
     t.plan(1)
-    var readable = concat({transform: dummy_transform}, ['up', 'stream'])
+    var readable = flatten({transform: dummy_transform}, ['up', 'stream'])
     readable.once('data', function (data) {
         t.equal(data.toString('utf8'), 'downstream')
     })
