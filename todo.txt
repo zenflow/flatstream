@@ -1,0 +1,4 @@
+add documentation
+change coding style
+"you should just always get back a buffer or if the stream has been set to objectMode, you should get an array of objects." - @substack https://github.com/maxogden/concat-stream/issues/15
+use standard error-first callback signature (i.e. `cb(error, data)`) since we now also have the option of attaching `eventListener(data)` to the `data` event.
