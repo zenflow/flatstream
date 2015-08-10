@@ -6,3 +6,11 @@ Simple utility for mixing synchronous functions/code and asynchronous streams
 [![dev-dependencies](https://david-dm.org/zenflow/flatstream/dev-status.svg)](https://david-dm.org/zenflow/flatstream#info=devDependencies)
 
 [![npm](https://nodei.co/npm/flatstream.svg?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/flatstream)
+
+## changelog
+
+### 1.0.0
+
+* initial release as `flatstream`
+* changed coding style
+* removed objectMode and variable encoding
