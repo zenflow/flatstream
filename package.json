@@ -3,11 +3,8 @@
   "version": "0.1.0",
   "description": "Simple utility for mixing synchronous functions/code and asynchronous streams",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
-    "test": "tape test/*.js test/server/*.js"
+    "test": "node test"
   },
   "repository": {
     "type": "git",
@@ -47,8 +44,7 @@
   "homepage": "https://github.com/zenflow/flatten-stream",
   "dependencies": {
     "inherits": "^2.0.1",
-    "readable-stream": "^2.0.2",
-    "typedarray": "0.0.6"
+    "readable-stream": "^2.0.2"
   },
   "devDependencies": {
     "tape": "^4.0.0"
