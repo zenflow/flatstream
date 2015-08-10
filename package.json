@@ -1,6 +1,6 @@
 {
   "name": "flatstream",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Simple utility for mixing synchronous functions/code and asynchronous streams",
   "main": "index.js",
   "scripts": {
