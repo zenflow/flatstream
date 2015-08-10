@@ -6,8 +6,8 @@ function FlatStream(opts) {
 }
 FlatStream.prototype.getBody = function () {
     var buffers = [];
-    for (var i = 0; i < this.body.length; i++) {
-        buffers.push(Buffer.isBuffer(this.body[i]) ? this.body[i] : Buffer(this.body[i]));
+    for (var i = 0; i < this.chunks.length; i++) {
+        buffers.push(Buffer.isBuffer(this.chunks[i]) ? this.chunks[i] : Buffer(this.chunks[i]));
     }
     var body = Buffer.concat(buffers);
     if (this.transform) {
@@ -28,7 +28,7 @@ function inheritsFlatStream(Stream) {
 function WritableFlatStream(opts, cb) {
     stream.Writable.call(this);
     FlatStream.call(this, opts);
-    this.body = [];
+    this.chunks = [];
     this.on('finish', function () {
         cb(this.getBody());
     });
@@ -36,14 +36,14 @@ function WritableFlatStream(opts, cb) {
 inherits(WritableFlatStream, stream.Writable);
 inheritsFlatStream(WritableFlatStream);
 WritableFlatStream.prototype._write = function (chunk, enc, next) {
-    this.body.push(chunk);
+    this.chunks.push(chunk);
     next();
 };
 
 function ReadableFlatStream(opts, data) {
     stream.Readable.call(this);
     FlatStream.call(this, opts);
-    this.body = data instanceof Array ? data : [data];
+    this.chunks = data instanceof Array ? data : [data];
 }
 inherits(ReadableFlatStream, stream.Readable);
 inheritsFlatStream(ReadableFlatStream);
@@ -55,7 +55,7 @@ ReadableFlatStream.prototype._read = function () {
 function DuplexFlatStream(opts) {
     stream.Duplex.call(this);
     FlatStream.call(this, opts);
-    this.body = [];
+    this.chunks = [];
     this.on('finish', function () {
         ReadableFlatStream.prototype._read.call(this);
     });
