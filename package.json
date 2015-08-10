@@ -1,5 +1,5 @@
 {
-  "name": "flatten-stream",
+  "name": "flatstream",
   "version": "0.1.0",
   "description": "Simple utility for mixing synchronous functions/code and asynchronous streams",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zenflow/flatten-stream.git"
+    "url": "https://github.com/zenflow/flatstream.git"
   },
   "keywords": [
     "stream",
@@ -36,12 +36,12 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zenflow/flatten-stream/issues"
+    "url": "https://github.com/zenflow/flatstream/issues"
   },
   "engines": [
     "node >= 0.10"
   ],
-  "homepage": "https://github.com/zenflow/flatten-stream",
+  "homepage": "https://github.com/zenflow/flatstream",
   "dependencies": {
     "inherits": "^2.0.1",
     "readable-stream": "^2.0.2"
